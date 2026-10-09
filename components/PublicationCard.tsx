@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Publication } from "@/content/publications";
-import { profile } from "@/content/profile";
 import BibtexButton from "./BibtexButton";
 import ExtLink from "./ExtLink";
 
@@ -76,9 +75,6 @@ export default function PublicationCard({ pub }: { pub: Publication }) {
         </div>
       </footer>
 
-      <p className="visually-hidden">
-        Authored by {profile.name}, ORCID {profile.orcid}.
-      </p>
     </article>
   );
 }

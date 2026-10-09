@@ -291,9 +291,18 @@
   max-width: 48rem;
 }
 
+/* The <li> stretches to the grid row, but the <a> inside it does not unless it
+   is told to. Without this, a tile with no identifier line sits shorter than its
+   neighbours and the row reads as ragged. */
+.hero__links li {
+  display: flex;
+}
+
 .idlink {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 2px;
   padding: var(--space-3) var(--space-4);
   border: 1px solid var(--rule);
@@ -1062,13 +1071,6 @@
   max-width: 48ch;
 }
 
-.skills__preface {
-  font-size: var(--step--1);
-  color: var(--ink-faint);
-  line-height: 1.6;
-  margin-bottom: var(--space-5);
-  max-width: 48ch;
-}
 
 .skill-groups {
   display: grid;
@@ -1115,16 +1117,6 @@
   color: var(--ink-faint);
 }
 
-.skill-group__caveat {
-  margin-top: var(--space-4);
-  padding: var(--space-3) var(--space-4);
-  font-size: 0.8rem;
-  line-height: 1.6;
-  color: var(--ink-soft);
-  background: var(--paper-sunken);
-  border-left: 2px solid var(--rule-strong);
-  border-radius: 0 var(--radius) var(--radius) 0;
-}
 
 /* --------------------------------------------------------------------------- */
 /* Contact                                                                     */
@@ -1722,15 +1714,6 @@
   line-height: 1.7;
 }
 
-.cv-skills__caveat {
-  font-size: 0.78rem;
-  color: var(--ink-faint);
-  line-height: 1.6;
-  margin-top: var(--space-2);
-  padding-left: var(--space-3);
-  border-left: 1px solid var(--rule-strong);
-  max-width: var(--measure);
-}
 
 .cv-embed {
   width: 100%;

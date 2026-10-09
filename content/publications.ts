@@ -204,7 +204,6 @@ export const publications: Publication[] = [
     ],
     selfIndex: 1,
     venue: "Frontiers in Medicine",
-    venueNote: "2026;13:1743015",
     year: 2026,
     date: "20 May 2026",
     doi: "10.3389/fmed.2026.1743015",
@@ -281,7 +280,6 @@ export const publications: Publication[] = [
       "2,649 emoji-aware Bangla sentences annotated for sarcasm and offensive language, released publicly so that the result in the ICCIT paper can be reproduced and improved on rather than taken on trust. It is the one artefact here a reader can open and check in a single click.",
     metrics: [
       { value: "2,649", label: "annotated sentences" },
-      { value: "Open", label: "public DOI, reusable" },
     ],
     methods: ["Corpus construction", "Annotation protocol design", "Emoji normalisation"],
     bibtex: [

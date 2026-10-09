@@ -23,10 +23,7 @@ export default function SiteFooter() {
             <ExtLink href={`mailto:${profile.email}`}>Email</ExtLink>
           </li>
         </ul>
-        <p className="site-footer__note">
-          Academic CV {profile.cvVersion}. Every figure on this site is reported at the value
-          published in the corresponding paper.
-        </p>
+        <p className="site-footer__note">Academic CV {profile.cvVersion}</p>
       </div>
     </footer>
   );

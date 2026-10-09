@@ -2,11 +2,14 @@ import Link from "next/link";
 import { profile } from "@/content/profile";
 import ExtLink from "./ExtLink";
 
-const identityLinks = [
+// `note` is the identifier itself, and only where one exists. "Citations" under
+// Scholar and "Profile" under LinkedIn were there to keep the grid symmetrical,
+// which is not a reason to put words in front of a reader.
+const identityLinks: { label: string; href: string; note?: string }[] = [
   { label: "ORCID", href: profile.links.orcid, note: profile.orcid },
-  { label: "Google Scholar", href: profile.links.scholar, note: "Citations" },
+  { label: "Google Scholar", href: profile.links.scholar },
   { label: "GitHub", href: profile.links.github, note: "saminista7" },
-  { label: "LinkedIn", href: profile.links.linkedin, note: "Profile" },
+  { label: "LinkedIn", href: profile.links.linkedin },
 ];
 
 export default function Hero() {
@@ -35,7 +38,7 @@ export default function Hero() {
             <li key={l.label}>
               <ExtLink href={l.href} className="idlink">
                 <span className="idlink__label">{l.label}</span>
-                <span className="idlink__note">{l.note}</span>
+                {l.note && <span className="idlink__note">{l.note}</span>}
               </ExtLink>
             </li>
           ))}
