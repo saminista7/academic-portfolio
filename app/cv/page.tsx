@@ -139,7 +139,6 @@ export default function CvPage() {
               <p className="cv-skills__items">
                 {g.items.map((i) => i.name).join(" · ")}
               </p>
-              {g.caveat && <p className="cv-skills__caveat">{g.caveat}</p>}
             </div>
           ))}
         </section>

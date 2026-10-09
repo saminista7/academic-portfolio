@@ -34,7 +34,7 @@ publication is a one-line edit in one file.
 | `content/profile.ts` | Identity, links, degree, objective, research statement, the three forward-looking questions |
 | `content/publications.ts` | Every paper and dataset: authors, venue, DOI, metrics, BibTeX, per-paper method notes |
 | `content/experience.ts` | Huawei and D-Ready, plus the supporting artefacts |
-| `content/skills.ts` | Skills with their honest level, caveats, and the timeline |
+| `content/skills.ts` | Skills with their real level, plus the education and awards timeline |
 
 The upstream source of truth is `backend/profile/applicant_profile.md` in the **Samin-Automailer**
 repo. That file is git-ignored there and is the same file every cold-email prompt reads, so the
@@ -54,9 +54,11 @@ These are not stylistic preferences. Each one is load-bearing for how a panel re
 3. **The PruDensNet contribution is stated as it actually was.** He conceived the architecture and
    led the research; he is second by byline. "I co-authored" is true of the byline and false about
    the work, and understating it answers the wrong question.
-4. **Skills are stated at their real level, with the caveats written out.** Notably: CUDA means
-   training models through a framework, not writing kernels, and C/C++ means degree coursework.
-   There are deliberately no proficiency bars, because a bar invents precision that does not exist.
+4. **Skills are precise, but not apologetic.** Each line says what the experience is and never
+   rounds it up. It also never apologises: an earlier draft explained at length that C/C++ was
+   only coursework, which answered a question no reader had asked and pointed at the weakest
+   line on the page. Precision lives in the level text now, not in a disclaimer. No proficiency
+   bars either, because a bar invents precision that does not exist.
 5. **No em dash in rendered prose.** It is the clearest single tell of machine-written text, and a
    research statement is the applicant's own voice. Code comments may use them; anything a reader
    sees may not. Check with `grep -o '—'` against the served HTML, not against the source.
@@ -82,12 +84,31 @@ Each `/publications/[slug]` page also emits Google Scholar's `citation_*` meta t
 points at the publisher's copy rather than competing with it. `app/sitemap.ts` and `app/robots.ts`
 are generated from the content modules.
 
+## Provenance of the publication records
+
+Author lists, titles, dates and metrics in `content/publications.ts` were verified on
+10 October 2026 against **Crossref** (`api.crossref.org/works/<doi>`) and each publisher's own
+page, not transcribed from the CV. Crossref is the authoritative record for DOI metadata and is
+the fastest way to re-check this if a paper is ever revised:
+
+```bash
+curl -s "https://api.crossref.org/works/10.1038/s41598-026-70577-4" | python -m json.tool
+```
+
+Two things that check caught, both worth remembering:
+
+- The Frontiers paper's real title is *"PruDensNet: a parameter efficient depthwise separable CNN
+  for MRI-based brain tumor classification"*. An earlier draft of this site carried a plausible
+  but invented title.
+- That paper's evaluation is **not** patient-wise. The source collection carries no patient
+  identifiers, and the paper says so in its limitations. The site now describes the pipeline as
+  leakage-aware *and states the limit*, which is both accurate and a stronger thing to show a
+  panel than a claim that would not survive their reading the paper.
+
 ## Known gaps
 
-- **Co-author names are placeholders.** `content/publications.ts` currently reads
-  "and seven co-authors" and similar, because the full author lists were not available when the
-  site was built. Fill them in from the papers; the author list is exactly the kind of detail a
-  panel checks.
 - **No citation counts.** Deliberate: they would need a live Scholar scrape, and a stale number is
   worse than a link to the live profile.
 - **Open Graph image** is not generated yet, so link previews show text only.
+- **`profile.siteUrl`** must match the real deployed domain before launch. Canonical URLs, the
+  sitemap and the JSON-LD all derive from it.

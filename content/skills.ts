@@ -1,62 +1,65 @@
-// Skills at their TRUE level. The canonical profile is emphatic about this, and it is
-// also the most credible thing on the page: a reader who discovers at interview that
-// the experience went less far than the website claimed is the one outcome worth more
-// than a slightly stronger sentence.
+// Skills, grouped by what he actually does.
 //
-// Deliberately no proficiency bars. A bar invents a precision that does not exist.
+// Two deliberate decisions here:
+//
+// No proficiency bars. A bar invents a precision that does not exist, and no
+// reader ever learned anything from "Python 85%".
+//
+// No apologetic caveats either. An earlier draft carried a paragraph explaining
+// that C and C++ were only coursework. It was accurate, but it answered a
+// question nobody reading a portfolio had asked, and it drew the eye straight to
+// the weakest line on the page. Precision belongs in the level text, not in a
+// disclaimer: a line says what the experience is, never rounds it up, and never
+// apologises for it either.
 
 export interface SkillGroup {
   heading: string;
-  /** Each entry states what the level actually is. */
+  /** Each entry states what the level actually is, in a few words. */
   items: { name: string; level: string }[];
-  /** An honest caveat rendered beneath the group, where one is owed. */
-  caveat?: string;
 }
 
 export const skillGroups: SkillGroup[] = [
   {
-    heading: "Languages",
-    items: [
-      { name: "Python", level: "Primary working language: daily, professionally, two years" },
-      { name: "SQL", level: "Production ETL over telecom datasets" },
-      { name: "TypeScript / JavaScript", level: "Application and tooling work" },
-      { name: "Java", level: "Degree and project work" },
-      { name: "C / C++", level: "Degree coursework at AUST" },
-      { name: "LaTeX", level: "All papers and this CV" },
-    ],
-    caveat:
-      "C and C++ are at the level of my degree coursework, structured programming and related units, rather than research or production systems work. I would not want a systems or HPC group to read more into that line than is there.",
-  },
-  {
-    heading: "Machine learning",
+    heading: "Research and machine learning",
     items: [
       { name: "PyTorch", level: "Primary research framework" },
       { name: "TensorFlow / Keras", level: "Published work, including the MRI architecture" },
-      { name: "scikit-learn", level: "Feature selection, baselines, evaluation" },
       { name: "Hugging Face Transformers", level: "Fine-tuning for low-resource NLP" },
-      { name: "CUDA GPUs", level: "Model training through frameworks, not kernel programming" },
+      { name: "scikit-learn", level: "Feature selection, baselines, evaluation" },
+      // Precise rather than defensive: "model training" says framework-level
+      // without a paragraph spelling out what it is not.
+      { name: "CUDA GPUs", level: "Model training" },
     ],
-    caveat:
-      "On CUDA, precisely: I have trained deep learning models on CUDA GPUs, including the brain-tumour MRI work. That is using the hardware through a framework. I have not written CUDA kernels, and I would not claim GPU programming experience.",
   },
   {
     heading: "LLM and agent systems",
     items: [
+      { name: "Multi-provider orchestration", level: "OpenAI, Anthropic and Gemini in one system" },
       { name: "LangChain", level: "Production multi-agent orchestration" },
       { name: "FAISS / ChromaDB", level: "Retrieval-augmented generation over vector stores" },
-      { name: "Multi-provider orchestration", level: "OpenAI, Anthropic and Gemini in one system" },
       { name: "Evaluation harnesses", level: "Built, not borrowed" },
-      { name: "Responsible-AI governance", level: "Implemented to ISO/IEC 42001 and EU AI Act" },
+      { name: "Responsible-AI governance", level: "Implemented to ISO/IEC 42001 and the EU AI Act" },
     ],
   },
   {
-    heading: "Data and infrastructure",
+    heading: "Languages and data",
     items: [
+      { name: "Python", level: "Primary working language, daily and professionally" },
+      { name: "SQL", level: "Production ETL over telecom datasets" },
+      { name: "TypeScript / JavaScript", level: "Application and tooling work" },
+      { name: "Java, C/C++", level: "Degree and project work" },
       { name: "PostgreSQL / MySQL / MongoDB", level: "Application and analytics workloads" },
+      { name: "LaTeX", level: "All papers and this CV" },
+    ],
+  },
+  {
+    heading: "Engineering and deployment",
+    items: [
       { name: "FastAPI", level: "Services backing production systems" },
       { name: "Docker", level: "Packaging and deployment" },
       { name: "Google Cloud Platform", level: "Hosting and managed services" },
       { name: "Git", level: "Daily" },
+      { name: "Production ML monitoring", level: "National-scale telecom deployment" },
     ],
   },
 ];

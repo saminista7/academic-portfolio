@@ -33,7 +33,7 @@ const diagrams: Record<string, { caption: string; stages: Stage[] }> = {
         label: "Mutual information",
         sub: "Feature selection",
         detail:
-          "Each feature is ranked by mutual information against the attack label, with no linearity assumed, which matters because false-data-injection signals are not linearly separable from ordinary load variation.",
+          "The feature space is reduced to 60 dimensions by mutual information, which ranks each feature against the attack label with no linearity assumed. That matters because false-data-injection signals are not linearly separable from ordinary load variation.",
       },
       {
         label: "ADASYN",
@@ -42,16 +42,16 @@ const diagrams: Record<string, { caption: string; stages: Stage[] }> = {
           "Minority examples are synthesised preferentially where the classifier struggles most. Applied strictly inside the training fold; applying it before the split is the usual way results like this get inflated.",
       },
       {
-        label: "1D CNN",
-        sub: "Local waveform shape",
+        label: "2x 1D CNN",
+        sub: "Swish, batch norm",
         detail:
-          "Convolutional front end extracts short-range temporal structure within the window: the local signature of a transient.",
+          "Two convolutional blocks with Swish activations and batch normalisation extract short-range temporal structure within the window: the local signature of a transient.",
       },
       {
         label: "Transformer",
-        sub: "Full-window attention",
+        sub: "Eight-head self-attention",
         detail:
-          "Self-attention relates any two timesteps directly, so a long-range dependency does not have to survive a recurrence to be captured.",
+          "A single Transformer encoder block with eight-head self-attention relates any two timesteps directly, so a long-range dependency does not have to survive a recurrence to be captured.",
       },
       {
         label: "BiGRU",
@@ -61,27 +61,27 @@ const diagrams: Record<string, { caption: string; stages: Stage[] }> = {
       },
       {
         label: "0.94 ROC-AUC",
-        sub: "MSU power-system benchmark",
+        sub: "14,415 held-out samples",
         detail:
-          "ROC-AUC is reported rather than accuracy, because on an imbalanced detection task accuracy rewards a model that predicts normal everywhere.",
+          "Measured on 14,415 held-out samples of the Mississippi State University power-system benchmark. ROC-AUC is reported rather than accuracy, because on an imbalanced detection task accuracy rewards a model that predicts normal everywhere.",
       },
     ],
   },
   prudensnet: {
     caption:
-      "PruDensNet: depthwise-separable blocks with attention augmentation, 1.46M parameters, evaluated leakage-aware by patient rather than by image.",
+      "PruDensNet: depthwise-separable blocks with channel and spatial attention, roughly 1.46M parameters, under a leakage-aware pipeline whose limits the paper states.",
     stages: [
       {
         label: "Brain MRI",
         sub: "Four diagnostic classes",
         detail:
-          "Axial slices across four classes. Crucially, a single patient contributes many near-duplicate slices, which is where the evaluation trap lives.",
+          "Axial slices across four classes. A single patient contributes many near-duplicate slices, which is where the evaluation trap on this task lives.",
       },
       {
-        label: "Patient-wise split",
-        sub: "Leakage-aware protocol",
+        label: "Leakage-aware split",
+        sub: "And its stated limit",
         detail:
-          "The split is made by patient, not by image. Split at random and near-identical slices land either side of the boundary, which is how this task produces 99% figures that collapse on a new scanner.",
+          "The pipeline is built to control leakage between near-duplicate slices, and the paper states its own limit: the source collection carries no patient identifiers, so a patient-wise split is not possible and residual leakage is acknowledged rather than argued away.",
       },
       {
         label: "Depthwise conv",
@@ -96,10 +96,10 @@ const diagrams: Record<string, { caption: string; stages: Stage[] }> = {
           "A 1x1 convolution recombines channels. Together with the depthwise stage this factorises one standard convolution into two much cheaper ones.",
       },
       {
-        label: "Attention",
-        sub: "Selective recovery",
+        label: "Attention + GELU",
+        sub: "Channel and spatial",
         detail:
-          "Factorisation costs cross-channel context. Attention buys it back selectively, reweighting the channels and spatial regions carrying tumour signal rather than restoring capacity uniformly.",
+          "Factorisation costs cross-channel context. Lightweight channel and spatial attention, with GELU activations, buys it back selectively, reweighting the channels and regions carrying tumour signal rather than restoring capacity uniformly.",
       },
       {
         label: "96.05% / 1.46M",
@@ -111,7 +111,7 @@ const diagrams: Record<string, { caption: string; stages: Stage[] }> = {
   },
   sarcasm: {
     caption:
-      "Emoji-aware Bangla sarcasm pipeline. The emoji is retained through preprocessing because it carries the polarity inversion the label depends on.",
+      "Emoji-aware Bangla sarcasm pipeline. The emoji survives preprocessing as translated text because it carries the polarity inversion the label depends on.",
     stages: [
       {
         label: "Bangla social text",
@@ -126,22 +126,22 @@ const diagrams: Record<string, { caption: string; stages: Stage[] }> = {
           "A public corpus released under its own DOI, with the annotation protocol documented, so the result below can be checked rather than taken on trust.",
       },
       {
-        label: "Emoji-aware tokenisation",
-        sub: "The emoji is not stripped",
+        label: "Emoji normalisation",
+        sub: "Translated, not stripped",
         detail:
-          "Standard pipelines discard emoji during cleaning, which deletes the label-bearing signal outright. Here they are tokenised alongside the text.",
+          "Standard pipelines discard emoji during cleaning, which deletes the label-bearing signal outright. Here each emoji is normalised and translated into its Bangla text equivalent, so its meaning enters the model as language.",
       },
       {
-        label: "mBERT fine-tuning",
-        sub: "K-fold cross-validation",
+        label: "Model comparison",
+        sub: "Classical, RNN, transformer",
         detail:
-          "Multilingual BERT fine-tuned on the combined sequence, cross-validated rather than single-split, which is the minimum defensible protocol on a corpus this size.",
+          "TF-IDF classifiers (Naive Bayes, Random Forest, Decision Tree, SVM), recurrent models (GRU, LSTM, BiLSTM) and three multilingual transformers (Bangla BERT, mBERT, MuRIL) were evaluated on the same corpus, K-fold rather than single-split.",
       },
       {
         label: "97.82% / 91.3%",
         sub: "mBERT vs BiLSTM baseline",
         detail:
-          "The gap over the recurrent baseline is the evidence that emoji-aware input helps substantially. It is a high number on a small single-source dataset, and is presented as that.",
+          "mBERT with K-fold cross-validation against the strongest recurrent baseline. The gap is the evidence that emoji-aware input helps substantially. It is a high number on a small single-source dataset, and is presented as that.",
       },
     ],
   },

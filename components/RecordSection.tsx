@@ -40,12 +40,7 @@ export default function RecordSection() {
 
           <Reveal className="record-col" delay={80}>
             <h3 className="record-col__title">Technical skills</h3>
-            {/* No proficiency bars. A bar invents a precision that does not exist,
-                and the caveats below are worth more to a reader than a graphic. */}
-            <p className="skills__preface">
-              Each line states how far the experience actually goes. Where a line could be read
-              as more than it is, the caveat is written out rather than left to an interview.
-            </p>
+            {/* No proficiency bars: a bar invents a precision that does not exist. */}
             <div className="skill-groups">
               {skillGroups.map((group) => (
                 <div className="skill-group" key={group.heading}>
@@ -58,7 +53,6 @@ export default function RecordSection() {
                       </div>
                     ))}
                   </dl>
-                  {group.caveat && <p className="skill-group__caveat">{group.caveat}</p>}
                 </div>
               ))}
             </div>
