@@ -35,7 +35,7 @@ export default function PublicationCard({ pub }: { pub: Publication }) {
 
       <p className="pub__venue">
         <span className="pub__venue-name">{pub.venue}</span>
-        <span className="pub__venue-note">{pub.venueNote}</span>
+        {pub.venueNote && <span className="pub__venue-note">{pub.venueNote}</span>}
         <span className="pub__date">{pub.date}</span>
       </p>
 

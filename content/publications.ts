@@ -20,8 +20,13 @@ export interface Publication {
   /** Zero-based index of Ahnaf Samin in `authors`, so the UI can emphasise it. */
   selfIndex: number;
   venue: string;
-  /** What the venue means to a reader who does not know it. */
-  venueNote: string;
+  /**
+   * What the venue MEANS to a reader who does not know it: "Nature Portfolio",
+   * "IEEE". Standing only. Not a slot for version numbers or citation metadata,
+   * which say nothing a resolving DOI has not already said. Omit it rather than
+   * fill it.
+   */
+  venueNote?: string;
   year: number;
   date: string;
   doi: string;
@@ -265,7 +270,6 @@ export const publications: Publication[] = [
     ],
     selfIndex: 0,
     venue: "Mendeley Data",
-    venueNote: "v2, public",
     year: 2025,
     date: "23 September 2025",
     doi: "10.17632/7ryvn5gw88.2",

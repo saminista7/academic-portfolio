@@ -59,7 +59,7 @@ export default async function PublicationPage({
         <header className="paper__head">
           <p className="paper__venue">
             <span className="paper__venue-name">{pub.venue}</span>
-            <span className="paper__venue-note">{pub.venueNote}</span>
+            {pub.venueNote && <span className="paper__venue-note">{pub.venueNote}</span>}
             <span className="paper__date">{pub.date}</span>
           </p>
           <h1 className="paper__title">{pub.title}</h1>

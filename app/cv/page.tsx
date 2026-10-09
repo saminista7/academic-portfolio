@@ -82,7 +82,9 @@ export default function CvPage() {
                 </p>
                 <p className="cv-pubs__title">{p.title}</p>
                 <p className="cv-pubs__venue">
-                  <em>{p.venue}</em>, {p.venueNote}. <ExtLink href={p.url}>doi:{p.doi}</ExtLink>
+                  <em>{p.venue}</em>
+                  {p.venueNote ? `, ${p.venueNote}` : ""}.{" "}
+                  <ExtLink href={p.url}>doi:{p.doi}</ExtLink>
                 </p>
                 <p className="cv-pubs__role">{p.contribution}</p>
               </li>
