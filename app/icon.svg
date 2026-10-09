@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="AS">
+  <!-- Full-bleed tile. A glyph on a transparent ground disappears against dark
+       browser chrome, so the mark is a solid tile in the one accent colour the
+       site uses for links: the tab matches the page it opens. -->
+  <rect width="32" height="32" rx="6" fill="#1f4e79"/>
+  <!-- A system serif, not the page's Newsreader: a favicon is fetched outside
+       the document, so an @font-face would never load and the text would fall
+       back to sans anyway. Georgia and Times are its closest widely installed
+       relatives.
+
+       size/spacing/position are measured, not guessed. At 21/-1.8 the caps fill
+       86% of the width and 48% of the height, which is the largest that keeps a
+       margin on both sides; x is 15.75 rather than 16 because negative tracking
+       adds a trailing gap after the S that would otherwise push the pair right. -->
+  <text x="15.75" y="23.3"
+        text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', 'Nimbus Roman', serif"
+        font-size="21"
+        font-weight="600"
+        letter-spacing="-1.8"
+        fill="#ffffff">AS</text>
+</svg>
