@@ -5,6 +5,7 @@ import { publications, publicationBySlug } from "@/content/publications";
 import { profile } from "@/content/profile";
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 import BibtexButton from "@/components/BibtexButton";
+import ExtLink from "@/components/ExtLink";
 
 export function generateStaticParams() {
   return publications.map((p) => ({ slug: p.slug }));
@@ -81,19 +82,19 @@ export default async function PublicationPage({
           </ul>
 
           <div className="paper__actions">
-            <a className="btn btn--primary" href={pub.url}>
+            <ExtLink className="btn btn--primary" href={pub.url}>
               Read at {pub.venue}
-            </a>
+            </ExtLink>
             {pub.extraLinks?.map((l) => (
-              <a key={l.url} className="btn" href={l.url}>
+              <ExtLink key={l.url} className="btn" href={l.url}>
                 {l.label}
-              </a>
+              </ExtLink>
             ))}
             <BibtexButton bibtex={pub.bibtex} title={pub.title} />
           </div>
 
           <p className="paper__doi">
-            DOI <a href={pub.url}>{pub.doi}</a>
+            DOI <ExtLink href={pub.url}>{pub.doi}</ExtLink>
           </p>
         </header>
 

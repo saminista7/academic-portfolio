@@ -3,6 +3,7 @@ import { profile } from "@/content/profile";
 import { publications } from "@/content/publications";
 import { experience, artefacts } from "@/content/experience";
 import { skillGroups } from "@/content/skills";
+import ExtLink from "@/components/ExtLink";
 
 export const metadata: Metadata = {
   title: "Academic CV",
@@ -25,16 +26,16 @@ export default function CvPage() {
           <h1 className="cv-head__title">{profile.name}</h1>
           <p className="cv-head__role">{profile.title}</p>
           <p className="cv-head__meta">
-            {profile.location} · <a href={`mailto:${profile.email}`}>{profile.email}</a> ·{" "}
-            <a href={profile.links.orcid}>ORCID {profile.orcid}</a>
+            {profile.location} · <ExtLink href={`mailto:${profile.email}`}>{profile.email}</ExtLink> ·{" "}
+            <ExtLink href={profile.links.orcid}>ORCID {profile.orcid}</ExtLink>
           </p>
           <div className="cv-head__actions">
-            <a className="btn btn--primary" href={profile.cvFile} download>
+            <ExtLink className="btn btn--primary" href={profile.cvFile} download>
               Download PDF (version {profile.cvVersion})
-            </a>
-            <a className="btn" href={profile.cvFile} target="_blank" rel="noreferrer">
+            </ExtLink>
+            <ExtLink className="btn" href={profile.cvFile}>
               Open in a new tab
-            </a>
+            </ExtLink>
           </div>
         </header>
 
@@ -81,7 +82,7 @@ export default function CvPage() {
                 </p>
                 <p className="cv-pubs__title">{p.title}</p>
                 <p className="cv-pubs__venue">
-                  <em>{p.venue}</em>, {p.venueNote}. <a href={p.url}>doi:{p.doi}</a>
+                  <em>{p.venue}</em>, {p.venueNote}. <ExtLink href={p.url}>doi:{p.doi}</ExtLink>
                 </p>
                 <p className="cv-pubs__role">{p.contribution}</p>
               </li>
@@ -119,7 +120,7 @@ export default function CvPage() {
             {artefacts.map((a) => (
               <li key={a.title}>
                 <h3 className="cv-entry__title">
-                  {a.url ? <a href={a.url}>{a.title}</a> : a.title}
+                  {a.url ? <ExtLink href={a.url}>{a.title}</ExtLink> : a.title}
                   <span className="cv-projects__note">{a.note}</span>
                 </h3>
                 <p className="cv-entry__detail">{a.summary}</p>
@@ -164,9 +165,9 @@ export default function CvPage() {
                 a real link rather than a blank frame. */}
             <p className="cv-embed__fallback">
               Your browser will not display the PDF inline.{" "}
-              <a href={profile.cvFile} download>
+              <ExtLink href={profile.cvFile} download>
                 Download it instead
-              </a>
+              </ExtLink>
               .
             </p>
           </object>

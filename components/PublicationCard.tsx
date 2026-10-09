@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Publication } from "@/content/publications";
 import { profile } from "@/content/profile";
 import BibtexButton from "./BibtexButton";
+import ExtLink from "./ExtLink";
 
 const kindLabel: Record<Publication["kind"], string> = {
   journal: "Journal article",
@@ -18,7 +19,7 @@ export default function PublicationCard({ pub }: { pub: Publication }) {
       </header>
 
       <h3 className="pub__title">
-        <a href={pub.url}>{pub.title}</a>
+        <ExtLink href={pub.url}>{pub.title}</ExtLink>
       </h3>
 
       {/* His name is emphasised rather than bolded alone: a panel scanning
@@ -56,10 +57,10 @@ export default function PublicationCard({ pub }: { pub: Publication }) {
       </ul>
 
       <footer className="pub__foot">
-        <a className="pub__doi" href={pub.url}>
+        <ExtLink className="pub__doi" href={pub.url}>
           <span className="visually-hidden">DOI: </span>
           {pub.doi}
-        </a>
+        </ExtLink>
         <div className="pub__actions">
           {pub.detail && (
             <Link className="btn btn--small" href={`/publications/${pub.slug}`}>
@@ -67,9 +68,9 @@ export default function PublicationCard({ pub }: { pub: Publication }) {
             </Link>
           )}
           {pub.extraLinks?.map((l) => (
-            <a key={l.url} className="btn btn--small btn--quiet" href={l.url}>
+            <ExtLink key={l.url} className="btn btn--small btn--quiet" href={l.url}>
               {l.label}
-            </a>
+            </ExtLink>
           ))}
           <BibtexButton bibtex={pub.bibtex} title={pub.title} />
         </div>

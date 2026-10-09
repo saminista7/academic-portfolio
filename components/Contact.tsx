@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import ExtLink from "./ExtLink";
 import { profile } from "@/content/profile";
 
 // Lightly split so a naive scraper walking the HTML does not pick up a usable
@@ -20,11 +21,11 @@ export default function Contact() {
         <Reveal className="contact-grid" delay={60}>
           <div className="contact-block">
             <p className="contact-block__label">Email</p>
-            <a className="contact-block__value contact-email" href={`mailto:${profile.email}`}>
+            <ExtLink className="contact-block__value contact-email" href={`mailto:${profile.email}`}>
               {mailUser}
               <span aria-hidden="true">@</span>
               {mailHost}
-            </a>
+            </ExtLink>
           </div>
 
           <div className="contact-block">
@@ -43,28 +44,28 @@ export default function Contact() {
             <p className="contact-block__label">Verify the record</p>
             <ul className="contact-block__links">
               <li>
-                <a href={profile.links.orcid}>ORCID {profile.orcid}</a>
+                <ExtLink href={profile.links.orcid}>ORCID {profile.orcid}</ExtLink>
               </li>
               <li>
-                <a href={profile.links.scholar}>Google Scholar</a>
+                <ExtLink href={profile.links.scholar}>Google Scholar</ExtLink>
               </li>
               <li>
-                <a href={profile.links.github}>GitHub</a>
+                <ExtLink href={profile.links.github}>GitHub</ExtLink>
               </li>
               <li>
-                <a href={profile.links.linkedin}>LinkedIn</a>
+                <ExtLink href={profile.links.linkedin}>LinkedIn</ExtLink>
               </li>
             </ul>
           </div>
         </Reveal>
 
         <Reveal className="contact-cta" delay={120}>
-          <a className="btn btn--primary" href={`mailto:${profile.email}`}>
+          <ExtLink className="btn btn--primary" href={`mailto:${profile.email}`}>
             Write to me
-          </a>
-          <a className="btn" href={profile.cvFile} download>
+          </ExtLink>
+          <ExtLink className="btn" href={profile.cvFile} download>
             Download the academic CV (PDF)
-          </a>
+          </ExtLink>
         </Reveal>
       </div>
     </section>

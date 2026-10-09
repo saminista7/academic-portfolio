@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { profile } from "@/content/profile";
+import ExtLink from "./ExtLink";
 
 const identityLinks = [
   { label: "ORCID", href: profile.links.orcid, note: profile.orcid },
@@ -32,10 +33,10 @@ export default function Hero() {
         <ul className="hero__links">
           {identityLinks.map((l) => (
             <li key={l.label}>
-              <a href={l.href} className="idlink">
+              <ExtLink href={l.href} className="idlink">
                 <span className="idlink__label">{l.label}</span>
                 <span className="idlink__note">{l.note}</span>
-              </a>
+              </ExtLink>
             </li>
           ))}
         </ul>

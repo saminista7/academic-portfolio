@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import ExtLink from "./ExtLink";
 import { experience, artefacts } from "@/content/experience";
 
 export default function AppliedWork() {
@@ -66,7 +67,7 @@ export default function AppliedWork() {
             {artefacts.map((a) => (
               <li key={a.title} className="artefact">
                 <h4 className="artefact__title">
-                  {a.url ? <a href={a.url}>{a.title}</a> : a.title}
+                  {a.url ? <ExtLink href={a.url}>{a.title}</ExtLink> : a.title}
                 </h4>
                 <p className="artefact__note">{a.note}</p>
                 <p className="artefact__summary">{a.summary}</p>
