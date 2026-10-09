@@ -9,3 +9,6 @@ next-env.d.ts
 
 # The served copy lives in public/. This root copy is the local original.
 /Ahnaf_Samin_Academic_CV_6.0.pdf
+
+.vercel
+.env*

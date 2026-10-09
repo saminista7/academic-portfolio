@@ -21,7 +21,7 @@ export const profile = {
   },
   cvFile: "/Ahnaf_Samin_Academic_CV_6.0.pdf",
   cvVersion: "6.0",
-  siteUrl: "https://ahnaf-samin-academic.vercel.app",
+  siteUrl: "https://ahnaf-samin.vercel.app",
 
   degree: {
     award: "B.Sc. in Computer Science and Engineering",
