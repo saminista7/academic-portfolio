@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 interface Props {
   children: React.ReactNode;
-  /** Stagger within a group, in milliseconds. Keep it small. */
+  /** Stagger inside a group, in ms. Keep it small. */
   delay?: number;
   as?: "div" | "section" | "li" | "article";
   className?: string;
@@ -13,13 +13,11 @@ interface Props {
 }
 
 /**
- * Reveals once, on first intersection, then disconnects. Deliberately does not
- * re-hide on scroll-out: content that vanishes when you scroll back up is a
- * readability bug dressed as an effect.
+ * Fades in once on first intersection, then stops observing. It never hides
+ * again on scroll up, which would just make the page annoying to reread.
  *
- * If the reader prefers reduced motion we mark it visible immediately and never
- * observe anything. The CSS also neutralises the transform, so this is belt and
- * braces on purpose — nothing here should be able to leave content invisible.
+ * Under reduced motion it shows immediately without observing anything. The CSS
+ * neutralises the transform too, so nothing here can strand content invisible.
  */
 export default function Reveal({
   children,

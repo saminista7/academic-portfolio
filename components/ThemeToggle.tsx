@@ -5,10 +5,9 @@ import { useEffect, useState } from "react";
 type Theme = "light" | "dark";
 
 /**
- * Three real states exist: explicit light, explicit dark, and "no choice made"
- * (which follows the system). The toggle only ever writes an explicit choice —
- * it reads the resolved appearance first so the first click does what the reader
- * expects rather than flipping away from what they can see.
+ * Three states: explicit light, explicit dark, and no choice yet (follow the
+ * system). Clicking always writes an explicit choice, and it reads whatever is
+ * currently showing first so the first click goes the way you expect.
  */
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme | null>(null);
@@ -29,12 +28,11 @@ export default function ThemeToggle() {
     try {
       localStorage.setItem("theme", next);
     } catch {
-      // A blocked localStorage is not worth failing a click over.
+      // Private mode can block storage. Not worth failing the click over.
     }
   }
 
-  // Render the control immediately but label it only once the resolved theme is
-  // known, so the accessible name is never wrong.
+  // Label it only once the theme is resolved, so the a11y name is never wrong.
   const known = theme !== null;
   const label = !known ? "Toggle colour theme" : theme === "dark" ? "Switch to light theme" : "Switch to dark theme";
 

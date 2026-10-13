@@ -2,9 +2,8 @@ import Link from "next/link";
 import { profile } from "@/content/profile";
 import ExtLink from "./ExtLink";
 
-// `note` is the identifier itself, and only where one exists. "Citations" under
-// Scholar and "Profile" under LinkedIn were there to keep the grid symmetrical,
-// which is not a reason to put words in front of a reader.
+// `note` holds the actual identifier, where there is one. Scholar and LinkedIn
+// have none worth showing, so they get no second line.
 const identityLinks: { label: string; href: string; note?: string }[] = [
   { label: "ORCID", href: profile.links.orcid, note: profile.orcid },
   { label: "Google Scholar", href: profile.links.scholar },

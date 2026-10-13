@@ -1,12 +1,13 @@
 /* ---------------------------------------------------------------------------
    Design tokens.
 
-   Light is the primary palette: warm paper, near-black ink, one accent used only
-   for links and active state. Dark is a real second palette rather than an
-   inversion — the ground warms toward ink-blue, not toward pure black, because a
-   serif at #000 on #fff inverted reads as glare.
+   Light is the main palette: warm paper, near black ink, one accent used only
+   for links and active state. Dark is a separate palette rather than an
+   inversion; the ground sits toward ink blue because pure black behind a serif
+   reads as glare.
 
-   Rule: a colour's only definition never lives inside a media query.
+   Keep every colour defined on bare :root as well, never only inside a media
+   query, or the toggle breaks in one direction.
    --------------------------------------------------------------------------- */
 
 :root {
@@ -222,8 +223,7 @@ svg {
   border-top: 0;
 }
 
-/* The small-caps label that precedes every section heading. It is the single
-   device that makes the whole page read as one typeset document. */
+/* Small caps label above each section heading. */
 .eyebrow {
   font-family: var(--font-sans);
   font-size: var(--step--1);
@@ -350,9 +350,8 @@ svg {
     display: none !important;
   }
 
-  /* Print happens without scrolling, so the reveal observer never fires for
-     anything below the fold. Without this, printing the page yields blank
-     sections. Same reason a full-page screenshot looked empty. */
+  /* Printing does not scroll, so the reveal observer never fires below the
+     fold and those sections would print blank. */
   .reveal {
     opacity: 1 !important;
     transform: none !important;

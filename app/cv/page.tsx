@@ -12,10 +12,9 @@ export const metadata: Metadata = {
 };
 
 /**
- * Both forms of the CV on one page: the PDF for anyone who wants the document,
- * and a full HTML version for the reader who will not open an attachment. The
- * HTML version is not a teaser — it carries the same facts, so nothing is gated
- * behind a download.
+ * The CV both ways: the PDF for anyone who wants the file, and the same content
+ * as HTML for anyone who will not open one. The HTML version is complete, not a
+ * preview.
  */
 export default function CvPage() {
   return (
@@ -162,8 +161,8 @@ export default function CvPage() {
             type="application/pdf"
             aria-label={`Academic CV of ${profile.name}, version ${profile.cvVersion}`}
           >
-            {/* Mobile browsers routinely refuse to embed a PDF, so the fallback is
-                a real link rather than a blank frame. */}
+            {/* Mobile browsers often refuse to embed a PDF, so give them a link
+                rather than an empty frame. */}
             <p className="cv-embed__fallback">
               Your browser will not display the PDF inline.{" "}
               <ExtLink href={profile.cvFile} download>

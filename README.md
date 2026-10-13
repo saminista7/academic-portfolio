@@ -1,114 +1,77 @@
-# Academic portfolio — Ahnaf Samin
+# Academic portfolio
 
-The academic counterpart to the commercial portfolio. Built for two audiences that ask different
-questions than a recruiter does:
+My personal academic site: publications, research statement, applied work and CV.
 
-- **professors** reading a cold email, who want to know whether the record is real and whether this
-  person can originate research rather than execute tasks;
-- **scholarship panels** (Erasmus Mundus, DAAD, Fulbright and similar), who are funding a
-  direction for several years rather than hiring for a role.
+Live at <https://ahnaf-samin.vercel.app>
 
-So the site leads with verifiable publications and a research statement, and treats industry work
-as evidence of research capability rather than as employment history.
+## Stack
 
-## Run it
+Next.js 15 (App Router), React 19, TypeScript. Plain CSS with custom properties, no Tailwind
+and no component library. Every route prerenders static, so it deploys anywhere and needs no
+server at request time.
+
+## Running it
 
 ```bash
 npm install
-npm run dev        # http://localhost:3002  (3001 belongs to the Automailer frontend)
-npm run typecheck  # tsc --noEmit
+npm run dev        # http://localhost:3002
+npm run typecheck
 npm run build
 ```
 
-Next.js 15 (App Router) + React 19 + TypeScript. Plain CSS with design tokens, no Tailwind, no UI
-library. Everything prerenders static, so it deploys to Vercel with no configuration and would
-also survive a static export.
+Port 3002 rather than 3000 because 3001 is taken by another project of mine.
 
 ## Where the content lives
 
-All facts sit in typed modules under `content/`, and no component hardcodes a claim. Updating a
-publication is a one-line edit in one file.
+All the facts sit in `content/` as typed modules. No component hardcodes a claim, so updating
+a publication is a one line edit in one file.
 
 | File | Holds |
 | --- | --- |
-| `content/profile.ts` | Identity, links, degree, objective, research statement, the three forward-looking questions |
-| `content/publications.ts` | Every paper and dataset: authors, venue, DOI, metrics, BibTeX, per-paper method notes |
-| `content/experience.ts` | Huawei and D-Ready, plus the supporting artefacts |
-| `content/skills.ts` | Skills with their real level, plus the education and awards timeline |
+| `content/profile.ts` | Name, links, degree, research statement, objective |
+| `content/publications.ts` | Papers and datasets: authors, venue, DOI, metrics, BibTeX |
+| `content/experience.ts` | Roles, and the smaller projects that support them |
+| `content/skills.ts` | Skills, plus the education and awards timeline |
 
-The upstream source of truth is `backend/profile/applicant_profile.md` in the **Samin-Automailer**
-repo. That file is git-ignored there and is the same file every cold-email prompt reads, so the
-website and the emails cannot drift apart. When a fact changes, change it there first, then mirror
-it into `content/`.
+## Publication metadata
 
-## Rules this site is built on
-
-These are not stylistic preferences. Each one is load-bearing for how a panel reads the page.
-
-1. **Every figure is the published figure.** 0.94 ROC-AUC, 96.05%, 97.82%, 1.46M parameters,
-   7.79% power saving, 2,649 sentences. Nothing is rounded up, and every record links out to its
-   DOI so it can be checked at source. A dead DOI on an academic site is worse than no site.
-2. **Status is "graduate", never "undergraduate".** He holds a B.Sc. conferred in 2024. The words
-   "undergraduate student", "final-year", "pursuing a bachelor's" and "computer engineer" are all
-   factually wrong and must never appear.
-3. **The PruDensNet contribution is stated as it actually was.** He conceived the architecture and
-   led the research; he is second by byline. "I co-authored" is true of the byline and false about
-   the work, and understating it answers the wrong question.
-4. **Skills are precise, but not apologetic.** Each line says what the experience is and never
-   rounds it up. It also never apologises: an earlier draft explained at length that C/C++ was
-   only coursework, which answered a question no reader had asked and pointed at the weakest
-   line on the page. Precision lives in the level text now, not in a disclaimer. No proficiency
-   bars either, because a bar invents precision that does not exist.
-5. **No em dash in rendered prose.** It is the clearest single tell of machine-written text, and a
-   research statement is the applicant's own voice. Code comments may use them; anything a reader
-   sees may not. Check with `grep -o '—'` against the served HTML, not against the source.
-6. **CGPA appears once, in the record and on the CV page. Never as a hero statistic.**
-
-## Accessibility and robustness
-
-Semantic landmarks with `aria-labelledby` per section, a working skip link, visible focus rings,
-AA contrast in both palettes, and keyboard operation for the filters, the BibTeX buttons and the
-diagram stepper (including arrow keys between stages). All motion sits behind
-`prefers-reduced-motion`, and `Reveal` cannot leave content hidden even if its observer never
-fires. There is a print stylesheet, because a panel member may well print this.
-
-The theme has three states: explicit light, explicit dark, and no choice (follows the system). A
-tiny inline script in `app/layout.tsx` applies a stored choice before first paint so the wrong
-palette never flashes.
-
-## Discoverability
-
-`app/layout.tsx` emits JSON-LD: one `Person` whose `sameAs` points at ORCID, Google Scholar,
-GitHub and LinkedIn, plus one `ScholarlyArticle` or `Dataset` per publication carrying its DOI.
-Each `/publications/[slug]` page also emits Google Scholar's `citation_*` meta tags, so the page
-points at the publisher's copy rather than competing with it. `app/sitemap.ts` and `app/robots.ts`
-are generated from the content modules.
-
-## Provenance of the publication records
-
-Author lists, titles, dates and metrics in `content/publications.ts` were verified on
-10 October 2026 against **Crossref** (`api.crossref.org/works/<doi>`) and each publisher's own
-page, not transcribed from the CV. Crossref is the authoritative record for DOI metadata and is
-the fastest way to re-check this if a paper is ever revised:
+Author lists, titles and dates were taken from Crossref rather than retyped from my CV. If a
+paper is ever revised, recheck it the same way:
 
 ```bash
-curl -s "https://api.crossref.org/works/10.1038/s41598-026-70577-4" | python -m json.tool
+curl -s "https://api.crossref.org/works/10.1038/s41598-026-70577-4"
 ```
 
-Two things that check caught, both worth remembering:
+Two things that check caught the first time round, both worth knowing about:
 
-- The Frontiers paper's real title is *"PruDensNet: a parameter efficient depthwise separable CNN
-  for MRI-based brain tumor classification"*. An earlier draft of this site carried a plausible
-  but invented title.
-- That paper's evaluation is **not** patient-wise. The source collection carries no patient
-  identifiers, and the paper says so in its limitations. The site now describes the pipeline as
-  leakage-aware *and states the limit*, which is both accurate and a stronger thing to show a
-  panel than a claim that would not survive their reading the paper.
+* The Frontiers paper is titled "PruDensNet: a parameter efficient depthwise separable CNN for
+  MRI-based brain tumor classification". An earlier draft of the site had a different title.
+* Its evaluation is not patient-wise. The dataset has no patient identifiers and the paper says
+  so in its limitations, so the site describes the pipeline as leakage aware and states that
+  limit rather than overclaiming.
 
-## Known gaps
+## Things worth knowing before editing
 
-- **No citation counts.** Deliberate: they would need a live Scholar scrape, and a stale number is
-  worse than a link to the live profile.
-- **Open Graph image** is not generated yet, so link previews show text only.
-- **`profile.siteUrl`** must match the real deployed domain before launch. Canonical URLs, the
-  sitemap and the JSON-LD all derive from it.
+* Figures on the site are the published figures. If you change one, change it in the paper first.
+* `siteUrl` in `content/profile.ts` drives canonical URLs, the sitemap and the JSON-LD. A stale
+  value there quietly points search engines at a domain that does not exist.
+* The favicon is `app/icon.svg`. The apple touch icon and the 1200x630 share card are generated
+  from the same palette, so keep them in step if the accent colour changes.
+* Theme follows the operating system by default. The toggle writes an explicit choice to
+  localStorage, and a small inline script in `app/layout.tsx` applies it before first paint so
+  the wrong palette never flashes.
+* All motion sits behind `prefers-reduced-motion`, and there is a print stylesheet, because
+  people do print these.
+
+## Deploying
+
+Connected to Vercel and to this repo, so pushing to `main` redeploys. Manual deploy:
+
+```bash
+vercel --prod
+```
+
+## Still to do
+
+* No citation counts. They would need a live Scholar scrape and a stale number is worse than a
+  link to the live profile.

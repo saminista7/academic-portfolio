@@ -14,8 +14,7 @@ const kindFilters: { value: KindFilter; label: string }[] = [
   { value: "dataset", label: "Datasets" },
 ];
 
-// Journal first, then conference, then dataset — the order a reader scanning for
-// standing expects, and the reason "kind" is a sort option at all.
+// Journal, then conference, then dataset.
 const kindRank: Record<PublicationKind, number> = { journal: 0, conference: 1, dataset: 2 };
 
 export default function PublicationList() {
@@ -30,7 +29,7 @@ export default function PublicationList() {
       return true;
     });
 
-    // Copy before sorting — never mutate the imported content module.
+    // Copy first: sort() mutates, and this array is imported.
     return [...filtered].sort((a, b) => {
       if (sort === "year-asc") return a.year - b.year;
       if (sort === "kind") return kindRank[a.kind] - kindRank[b.kind] || b.year - a.year;

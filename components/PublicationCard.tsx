@@ -21,8 +21,7 @@ export default function PublicationCard({ pub }: { pub: Publication }) {
         <ExtLink href={pub.url}>{pub.title}</ExtLink>
       </h3>
 
-      {/* His name is emphasised rather than bolded alone: a panel scanning
-          twenty applications needs to see author position without reading. */}
+      {/* Highlight my name so author position is visible without reading. */}
       <p className="pub__authors">
         {pub.authors.map((author, i) => (
           <span key={i}>

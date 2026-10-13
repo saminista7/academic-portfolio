@@ -215,8 +215,7 @@
   overflow: hidden;
 }
 
-/* A single faint rule grid, barely visible. It gives the page the feel of a
-   typeset sheet without becoming decoration. */
+/* Faint vertical rules, like a typeset sheet. Deliberately barely visible. */
 .hero::before {
   content: "";
   position: absolute;
@@ -1222,7 +1221,7 @@
   margin: var(--space-6) 0 0;
 }
 
-/* Wide content scrolls inside its own container — the body never does. */
+/* The diagram scrolls inside this box so the page body never scrolls. */
 .diagram__scroll {
   overflow-x: auto;
   padding-bottom: var(--space-3);

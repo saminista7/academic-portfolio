@@ -1,5 +1,5 @@
-// Applied work, framed as research capability rather than as a job history.
-// Figures (7.79%, four agents, 4x award) are exact and come from the canonical profile.
+// Roles, written up as research capability rather than as a job history.
+// The figures are exact.
 
 export interface Experience {
   slug: string;
@@ -7,11 +7,11 @@ export interface Experience {
   org: string;
   orgNote: string;
   period: string;
-  /** The single sentence that matters to a research panel. */
+  /** The one sentence worth reading if nothing else is. */
   headline: string;
   metrics: { value: string; label: string }[];
   bullets: string[];
-  /** Why a supervisor or funding panel should care — stated once, without hedging. */
+  /** Why this matters for research. Said once, no hedging. */
   whyItMatters: string;
   tags: string[];
 }
@@ -65,9 +65,7 @@ export const experience: Experience[] = [
   },
 ];
 
-/**
- * Secondary artefacts. These support a claim; they are never the headline.
- */
+/** Smaller projects. They back up a claim rather than leading. */
 export interface Artefact {
   title: string;
   note: string;

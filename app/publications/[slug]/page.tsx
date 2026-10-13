@@ -25,8 +25,8 @@ export async function generateMetadata({
     description: pub.summary,
     alternates: { canonical: `/publications/${pub.slug}` },
     openGraph: { title: pub.title, description: pub.summary, type: "article" },
-    // Google Scholar reads these. Without them the page competes with the
-    // publisher’s copy instead of pointing at it.
+    // Scholar reads these. Without them this page competes with the publisher
+    // copy instead of pointing at it.
     other: {
       citation_title: pub.title,
       citation_author: profile.name,

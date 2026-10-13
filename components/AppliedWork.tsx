@@ -60,7 +60,7 @@ export default function AppliedWork() {
           ))}
         </div>
 
-        {/* Supporting artefacts. Never a lead — they corroborate a claim made above. */}
+        {/* Supporting projects. They back up the roles above rather than leading. */}
         <Reveal className="artefacts">
           <h3 className="artefacts__title">Supporting work</h3>
           <ul className="artefact-grid">

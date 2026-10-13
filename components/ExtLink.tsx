@@ -2,26 +2,17 @@ import type { AnchorHTMLAttributes } from "react";
 
 type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
-  /**
-   * Suppress the screen-reader "opens in a new tab" hint. Only for links whose
-   * visible text already says where it goes and would otherwise read twice.
-   */
+  /** Drop the "opens in a new tab" hint when the link text already says so. */
   silent?: boolean;
 };
 
 /**
- * Every link that leaves this site opens in a new tab, so a reader who clicks a
- * DOI mid-page does not lose their place in the portfolio.
+ * Outbound links open in a new tab so clicking a DOI does not lose your place.
  *
- * `rel="noopener noreferrer"` is not optional with target="_blank": without
- * noopener the opened page gets a handle on this one via window.opener.
- *
- * Internal navigation deliberately does NOT use this component. A new tab for
- * every section link would leave a reader with ten tabs of the same site.
- *
- * mailto: and tel: are passed through untouched, because a target on those
- * leaves an orphaned blank tab behind in most browsers once the mail client
- * takes over.
+ * `rel="noopener"` matters: without it the opened page can reach back through
+ * window.opener. Internal links use next/link instead, since a new tab per
+ * section would pile up fast. mailto: and tel: skip the target, which otherwise
+ * leaves an empty tab behind once the mail client opens.
  */
 export default function ExtLink({ href, children, silent, ...rest }: Props) {
   const handoff = /^(mailto:|tel:)/i.test(href);

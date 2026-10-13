@@ -1,20 +1,11 @@
-// Skills, grouped by what he actually does.
+// Skills, grouped by the kind of work rather than by language.
 //
-// Two deliberate decisions here:
-//
-// No proficiency bars. A bar invents a precision that does not exist, and no
-// reader ever learned anything from "Python 85%".
-//
-// No apologetic caveats either. An earlier draft carried a paragraph explaining
-// that C and C++ were only coursework. It was accurate, but it answered a
-// question nobody reading a portfolio had asked, and it drew the eye straight to
-// the weakest line on the page. Precision belongs in the level text, not in a
-// disclaimer: a line says what the experience is, never rounds it up, and never
-// apologises for it either.
+// No percentage bars: "Python 85%" does not mean anything. The level text does
+// that job instead, and it should be specific without talking the entry down.
 
 export interface SkillGroup {
   heading: string;
-  /** Each entry states what the level actually is, in a few words. */
+  /** A few words on how far the experience actually goes. */
   items: { name: string; level: string }[];
 }
 
@@ -26,8 +17,7 @@ export const skillGroups: SkillGroup[] = [
       { name: "TensorFlow / Keras", level: "Published work, including the MRI architecture" },
       { name: "Hugging Face Transformers", level: "Fine-tuning for low-resource NLP" },
       { name: "scikit-learn", level: "Feature selection, baselines, evaluation" },
-      // Precise rather than defensive: "model training" says framework-level
-      // without a paragraph spelling out what it is not.
+      // "Model training" is the accurate scope here: frameworks, not kernels.
       { name: "CUDA GPUs", level: "Model training" },
     ],
   },

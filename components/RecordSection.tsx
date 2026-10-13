@@ -40,7 +40,7 @@ export default function RecordSection() {
 
           <Reveal className="record-col" delay={80}>
             <h3 className="record-col__title">Technical skills</h3>
-            {/* No proficiency bars: a bar invents a precision that does not exist. */}
+            {/* No percentage bars. See the note in content/skills.ts. */}
             <div className="skill-groups">
               {skillGroups.map((group) => (
                 <div className="skill-group" key={group.heading}>

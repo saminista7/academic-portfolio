@@ -1,9 +1,5 @@
-// Every publication record.
-//
-// Author lists, titles, dates and metrics were verified on 10 October 2026
-// against Crossref (api.crossref.org) and each publisher's own page, not copied
-// from a CV. A dead DOI or a misattributed author list on an academic site costs
-// more than a missing one.
+// Publication records. Author lists, titles and dates come from Crossref and the
+// publisher pages, not from my CV, so they stay right if the CV drifts.
 
 export type PublicationKind = "journal" | "conference" | "dataset";
 
@@ -17,14 +13,12 @@ export interface Publication {
   kind: PublicationKind;
   title: string;
   authors: string[];
-  /** Zero-based index of Ahnaf Samin in `authors`, so the UI can emphasise it. */
+  /** My position in `authors`, zero based, so the card can highlight it. */
   selfIndex: number;
   venue: string;
   /**
-   * What the venue MEANS to a reader who does not know it: "Nature Portfolio",
-   * "IEEE". Standing only. Not a slot for version numbers or citation metadata,
-   * which say nothing a resolving DOI has not already said. Omit it rather than
-   * fill it.
+   * Short note on what the venue is, like "Nature Portfolio" or "IEEE". Leave it
+   * out rather than putting volume numbers here; the DOI already covers those.
    */
   venueNote?: string;
   year: number;
@@ -34,7 +28,7 @@ export interface Publication {
   /** Secondary links: publisher mirrors, datasets, code. */
   extraLinks?: { label: string; url: string }[];
   topics: string[];
-  /** One sentence, in the first person, on what he actually did. */
+  /** One sentence on what I did on this paper. */
   contribution: string;
   /** Short abstract-style summary for the detail page. */
   summary: string;
@@ -209,9 +203,7 @@ export const publications: Publication[] = [
     doi: "10.3389/fmed.2026.1743015",
     url: "https://doi.org/10.3389/fmed.2026.1743015",
     topics: ["Medical imaging", "Efficient architectures", "Computer vision"],
-    // The canonical profile is explicit that "co-authored" is true of the byline
-    // and false about the work. This is the wording it asks for, and it is not a
-    // boast: it answers the question a supervisor is actually asking.
+    // Second by byline but I designed the network, so the wording says both.
     contribution:
       "I conceived the PruDensNet architecture and led the research. I am second by listing order, but the network is the one I designed.",
     summary:

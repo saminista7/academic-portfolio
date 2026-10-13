@@ -3,13 +3,10 @@
 import { useState } from "react";
 
 /**
- * Hand-built inline SVG. No chart library, no external asset — the diagram has to
- * survive a strict network and read correctly in both palettes, so every colour is
- * `currentColor` or a CSS token rather than a literal.
+ * Inline SVG, no chart library. Colours are CSS tokens or currentColor so it
+ * reads correctly in both themes and needs nothing from the network.
  *
- * The stepping is the point of making it interactive: a reader clicking through the
- * stages is being shown that the method can be explained, which is the thing a
- * supervisor is actually assessing.
+ * Stepping through the stages is the point: each one says why it is there.
  */
 
 interface Stage {
@@ -163,10 +160,9 @@ export default function ArchitectureDiagram({ kind }: { kind: string }) {
   return (
     <figure className="diagram">
       <div className="diagram__scroll">
-        {/* No width/height attributes: with the global `svg { max-width: 100% }`
-            they fight each other and the diagram either squashes or pushes the
-            page sideways. A min-width in px keeps the true size and lets the
-            wrapper scroll, which is what keeps the body from scrolling. */}
+        {/* No width/height attrs: they fight the global svg max-width and the
+            diagram either squashes or pushes the page sideways. A px min-width
+            keeps its size and lets the wrapper scroll instead. */}
         <svg
           viewBox={`0 0 ${width} ${height}`}
           role="img"

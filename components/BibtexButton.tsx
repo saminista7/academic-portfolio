@@ -3,10 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Copy BibTeX to the clipboard, with a textarea fallback for the browsers and
- * insecure-origin cases where the async Clipboard API is unavailable. Falling
- * back matters more than usual here: the whole point of the button is that a
- * reader can cite the paper without retyping it.
+ * Copies BibTeX, falling back to a hidden textarea where the Clipboard API is
+ * missing or the origin is insecure. The fallback matters: the button is
+ * pointless if it silently does nothing.
  */
 export default function BibtexButton({ bibtex, title }: { bibtex: string; title: string }) {
   const [state, setState] = useState<"idle" | "copied" | "failed">("idle");

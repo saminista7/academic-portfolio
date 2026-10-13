@@ -7,8 +7,8 @@ import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
 import "./components.css";
 
-// Self-hosted at build time by next/font — no runtime request to Google, which
-// keeps the page working behind an institutional proxy.
+// next/font self-hosts these at build time, so there is no runtime call to
+// Google and the page still works behind a university proxy.
 const newsreader = Newsreader({
   subsets: ["latin"],
   display: "swap",
@@ -69,9 +69,8 @@ export const metadata: Metadata = {
 };
 
 /**
- * JSON-LD. This is what makes the site corroborate the CV when somebody searches
- * his name: one Person with sameAs links out to ORCID and Scholar, and one
- * ScholarlyArticle per publication carrying its DOI.
+ * JSON-LD so a search for my name ties this site to ORCID and Scholar. One
+ * Person with sameAs links, plus one entry per publication carrying its DOI.
  */
 function structuredData() {
   const person = {
@@ -127,10 +126,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${newsreader.variable} ${inter.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
-      {/* No explicit <head> element here. Declaring one in an App Router layout
-          suppresses Next's own metadata injection, which silently emptied the
-          <title> on every page. Scripts go at the top of <body> instead, which
-          still runs the theme script before the page paints. */}
+      {/* Do not add a <head> element here. Declaring one stops Next injecting
+          its own metadata and empties <title> on every page, with no error.
+          Scripts sit at the top of <body>, which still runs before paint. */}
       <body>
         <script
           dangerouslySetInnerHTML={{

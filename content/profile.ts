@@ -1,11 +1,9 @@
-// Canonical facts. Source of truth is backend/profile/applicant_profile.md in the
-// Samin-Automailer repo plus Academic CV 6.0. Nothing here is inferred, rounded up,
-// or softened. If a fact changes, it changes here and nowhere else.
+// Every fact the site states about me. Components read from here, so a change
+// lands in one place. Figures match the CV and the papers exactly.
 
 export const profile = {
   name: "Ahnaf Samin",
-  // The profile file is emphatic: he is a GRADUATE. Never "undergraduate",
-  // never "final-year student", never "computer engineer".
+  // I graduated in 2024, so never "undergraduate" or "final-year student".
   title: "AI Engineer and Researcher",
   positioning:
     "Deep learning for low-resource languages, medical imaging, and the critical infrastructure where a model’s failure actually costs something.",
@@ -32,15 +30,14 @@ export const profile = {
   },
   ielts: "7.0",
 
-  // The ask, stated the way the profile insists on: funding is the hard
-  // requirement, the programme is not.
+  // Funding is the requirement; the degree title is not.
   objective: {
     cycle: "Fall 2027",
     levels: "MSc, PhD, or combined MSc+PhD",
     line: "Seeking a fully funded graduate place for Fall 2027. An MSc, a PhD, or a combined programme are all valid outcomes. Full funding is the hard requirement, the degree title is not.",
   },
 
-  // The status strip under the hero. Kept to three facts a reader can check.
+  // Three checkable facts, shown under the name.
   statusStrip: [
     "CSE graduate, AUST (2024)",
     "3 peer-reviewed publications",
@@ -55,7 +52,7 @@ export const profile = {
   ],
 } as const;
 
-// The research statement. Prose, not a skills list — a panel funds a direction.
+// Research statement. Prose rather than a skills list.
 export const researchStatement = {
   lead: "I work on deep learning in the three conditions that make it hard to do honestly: when the data is scarce, when the system is already deployed, and when being wrong has a cost.",
   paragraphs: [

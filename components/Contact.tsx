@@ -2,8 +2,8 @@ import Reveal from "./Reveal";
 import ExtLink from "./ExtLink";
 import { profile } from "@/content/profile";
 
-// Lightly split so a naive scraper walking the HTML does not pick up a usable
-// string, while the rendered text and the mailto link both stay correct.
+// Split so a basic scraper does not lift the address straight out of the HTML.
+// The visible text and the mailto both still read correctly.
 const [mailUser, mailHost] = profile.email.split("@");
 
 export default function Contact() {
